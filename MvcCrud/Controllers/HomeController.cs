@@ -18,15 +18,42 @@ namespace MvcCrud.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var list = _context.Students.ToList();
+            return View(list);
+        }
+
+        public async Task<IActionResult> Update(int id)
+        {
+            var student = _context.Students.Find(id);
+            return View("Student", student);
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var student = _context.Students.Find(id);
+            _context.Students.Remove(student);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Create(Student student)
 
         {
-            await _context.AddAsync(student);
+            if(student.Id == 0)
+            {
+                await _context.AddAsync(student);
+            }
+            else
+            {
+
+                _context.Update(student);             
+            }
+
+
             await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
+
         }
         public IActionResult Student(int? Id)
         {

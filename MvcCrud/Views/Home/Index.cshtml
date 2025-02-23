@@ -3,7 +3,7 @@
     ViewData["Title"] = "Home Page";
 }
 
-<a asp-action="Student" asp-route-id="null">Create</a>
+<a class="btn btn-primary mb-3" asp-action="Student">Create</a>
 
 <table class="table">
     <thead>
@@ -12,16 +12,21 @@
             <th scope="col">Name</th>
             <th scope="col">Surname</th>
             <th scope="col">Age</th>
+            <th scope="col">Actions</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>@student.Id</td>
-                <td>@student.Name</td>
-                <td>@student.Surname</td>
-                <td>@student.Age</td>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Surname</td>
+                <td>@item.Age</td>
+                <td>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a class="btn btn-secondary" asp-action="Update" asp-route-id="@item.Id">Update</a>
+                </td>
             </tr>
         }
     </tbody>
