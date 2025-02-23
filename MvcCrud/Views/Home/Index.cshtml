@@ -1,4 +1,28 @@
-﻿@{
+﻿@model IEnumerable<MvcCrud.Models.Student>
+@{
     ViewData["Title"] = "Home Page";
 }
 
+<a asp-action="Student" asp-route-id="null">Create</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Surname</th>
+            <th scope="col">Age</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@student.Id</td>
+                <td>@student.Name</td>
+                <td>@student.Surname</td>
+                <td>@student.Age</td>
+            </tr>
+        }
+    </tbody>
+</table>

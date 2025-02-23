@@ -21,6 +21,13 @@ namespace MvcCrud.Controllers
             return View();
         }
 
+        public async Task<IActionResult> Create(Student student)
+
+        {
+            await _context.AddAsync(student);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
         public IActionResult Student(int? Id)
         {
             Student student;
@@ -39,8 +46,6 @@ namespace MvcCrud.Controllers
 
             return View(student);
           
-
-            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
