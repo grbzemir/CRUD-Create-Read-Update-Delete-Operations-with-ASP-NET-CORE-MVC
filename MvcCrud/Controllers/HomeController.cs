@@ -23,13 +23,21 @@ namespace MvcCrud.Controllers
 
         public IActionResult Student(int? Id)
         {
-
+            Student student;
             if(Id.HasValue) 
             {
 
-                var student = _context.Students.Find(Id);
-                return View(student);
+                student = _context.Students.Find(Id);
+                
             }
+
+            else
+            {
+                 student = new Student();
+
+            }
+
+            return View(student);
           
 
             return View();
