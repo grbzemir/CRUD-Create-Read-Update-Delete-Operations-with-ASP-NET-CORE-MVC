@@ -1,3 +1,4 @@
+using CrudOperations.Models;
 using Microsoft.AspNetCore.Mvc;
 using MvcCrud.Models;
 using System.Diagnostics;
@@ -7,10 +8,12 @@ namespace MvcCrud.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly SchoolContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger , SchoolContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -18,8 +21,17 @@ namespace MvcCrud.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Student(int? Id)
         {
+
+            if(Id.HasValue) 
+            {
+
+                var student = _context.Students.Find(Id);
+                return View(student);
+            }
+          
+
             return View();
         }
 
